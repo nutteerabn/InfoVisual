@@ -1,10 +1,24 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-video_url = "https://www.example.com/video.mp4"  # ต้องเป็นลิงก์ .mp4 ตรงๆ
+st.set_page_config(layout="wide")
+st.title("🎥 ดูวิดีโอ + แถบเลื่อนเวลา")
 
-components.html(f"""
-    <video id="myVideo" width="800" controls>
+# === วิดีโอ URL ตรง (.mp4)
+video_urls = {
+    "APPAL_2a": "https://drive.google.com/uc?export=download&id=1hJXZmnYPEWjCVBapWU2QRKBvOTt3yqzo",
+    "Cloud_17a": "https://drive.google.com/uc?export=download&id=1rehRu2sIywGqHFfypJOl-F7FD34bwxK_"
+}
+
+# === Dropdown
+selected = st.selectbox("เลือกวิดีโอ", list(video_urls.keys()))
+
+# === แสดงวิดีโอด้วย HTML + JS
+if selected:
+    video_url = video_urls[selected]
+
+    components.html(f"""
+    <video id="myVideo" width="800" height="450" controls>
       <source src="{video_url}" type="video/mp4">
       Your browser does not support the video tag.
     </video>
@@ -16,12 +30,14 @@ components.html(f"""
     const video = document.getElementById("myVideo");
     const slider = document.getElementById("slider");
 
-    // Sync slider <-> video
     video.ontimeupdate = function() {{
-        slider.value = (video.currentTime / video.duration) * 100;
+        const value = (video.currentTime / video.duration) * 100;
+        slider.value = value;
     }};
+
     slider.oninput = function() {{
-        video.currentTime = (slider.value / 100) * video.duration;
+        const newTime = (slider.value / 100) * video.duration;
+        video.currentTime = newTime;
     }};
     </script>
-""", height=500)
+    """, height=520)
