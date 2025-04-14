@@ -1,22 +1,18 @@
 import streamlit as st
-import utils
 
-st.set_page_config(page_title="InfoVisual Dashboard", layout="wide")
-
-st.title("🎬 Eye Gaze Visual Dashboard")
-st.markdown("อัปโหลดวิดีโอและดูพฤติกรรมการมอง (Convex vs Concave Hull Area)")
-
-# ตัวเลือกไฟล์จาก Google Drive
-video_choices = {
-    "APPAL_2a": "your_file_id_here",
-    "NANN_3a": "your_file_id_here"
+# === วิดีโอจาก Google Drive (แบบ share link) ===
+video_links = {
+    "APPAL_2a": "https://drive.google.com/file/d/14k3dbuZXYMtEP6BNIdN_Wvb4hdK0BFaM/preview",
+    "SIMPS_9a": "https://drive.google.com/file/d/1hJXZmnYPEWjCVBapWU2QRKBvOTt3yqzo/preview",
+    # เพิ่มชื่อวิดีโอและลิงก์เพิ่มได้ที่นี่
 }
 
-video_label = st.selectbox("เลือกคลิปวิดีโอ", list(video_choices.keys()))
+st.title("🎥 Eye Gaze Video Dashboard")
 
-video_url = f"https://drive.google.com/uc?id={video_choices[video_label]}"
-st.video(video_url)
+# === Dropdown สำหรับเลือกวิดีโอ ===
+selected_clip = st.selectbox("เลือกวิดีโอที่ต้องการดู", list(video_links.keys()))
 
-# กราฟ
-df = utils.get_convex_concave_data(video_label)  # ตัวอย่างฟังก์ชันจาก utils
-st.line_chart(df[['Convex Area (Rolling Avg)', 'Concave Area (Rolling Avg)']])
+# === ฝังวิดีโอจาก Google Drive ===
+if selected_clip:
+    st.subheader(f"วิดีโอ: {selected_clip}")
+    st.video(video_links[selected_clip])
