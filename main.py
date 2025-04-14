@@ -115,4 +115,20 @@ def render_frame(frame_number):
             pass
         try:
             concave = alpha_shape(points, alpha=0.007)
-            if
+            if concave and concave.geom_type == 'Polygon':
+                exterior = np.array(concave.exterior.coords).astype(np.int32)
+                cv2.polylines(frame, [exterior.reshape(-1, 1, 2)], True, (255, 0, 0), 2)
+        except:
+            pass
+    frame_container.image(Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)), caption=f"Frame {frame_number}")
+
+# ▶️ แสดงผล
+if st.session_state.is_playing:
+    for f in range(frame_number, total_frames):
+        st.session_state.frame_number = f
+        render_frame(f)
+        time.sleep(1 / fps)
+else:
+    render_frame(st.session_state.frame_number)
+
+cap.release()
