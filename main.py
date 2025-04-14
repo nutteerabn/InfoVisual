@@ -1,20 +1,27 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-# วิดีโอจาก Google Drive (ใช้ ID -> preview)
-video_ids = {
-    "APPAL_2a": "1hJXZmnYPEWjCVBapWU2QRKBvOTt3yqzo",
-    "Cloud_17a": "1rehRu2sIywGqHFfypJOl-F7FD34bwxK_"
-}
+video_url = "https://www.example.com/video.mp4"  # ต้องเป็นลิงก์ .mp4 ตรงๆ
 
-st.title("🎥 ดูวิดีโอจาก Google Drive")
+components.html(f"""
+    <video id="myVideo" width="800" controls>
+      <source src="{video_url}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
 
-# Dropdown
-selected = st.selectbox("เลือกวิดีโอ", list(video_ids.keys()))
+    <br>
+    <input type="range" id="slider" min="0" max="100" value="0" style="width:800px">
 
-if selected:
-    file_id = video_ids[selected]
-    embed_url = f"https://drive.google.com/file/d/{file_id}/preview"
+    <script>
+    const video = document.getElementById("myVideo");
+    const slider = document.getElementById("slider");
 
-    st.subheader(f"วิดีโอ: {selected}")
-    components.iframe(embed_url, height=480, width=800)
+    // Sync slider <-> video
+    video.ontimeupdate = function() {{
+        slider.value = (video.currentTime / video.duration) * 100;
+    }};
+    slider.oninput = function() {{
+        video.currentTime = (slider.value / 100) * video.duration;
+    }};
+    </script>
+""", height=500)
