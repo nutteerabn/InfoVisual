@@ -16,6 +16,5 @@ def get_convex_concave_data(clip_name):
 
     return df
 
-def download_from_gdrive(file_id, output_path):
-    url = f'https://drive.google.com/uc?id={file_id}'
-    gdown.download(url, output_path, quiet=False)
+def download_folder_from_google_drive(url, output_path):
+    gdown.download_folder(url, output=output_path, quiet=False, use_cookies=False)
