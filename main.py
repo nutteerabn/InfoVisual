@@ -1,75 +1,76 @@
-import streamlit as st
 import cv2
-import os
 import numpy as np
-import scipy.io
+from scipy.spatial import ConvexHull, Delaunay
+from shapely.geometry import MultiPoint, LineString, MultiLineString
+from shapely.ops import unary_union, polygonize
 from PIL import Image
+import matplotlib.pyplot as plt
 
-@st.cache_data
-def load_gaze_data_from_folder(folder_path):
-    gaze_data = []
-    for filename in os.listdir(folder_path):
-        if filename.endswith(".mat"):
-            data = scipy.io.loadmat(os.path.join(folder_path, filename))
-            record = data['eyetrackRecord']
-            x = record['x'][0, 0].flatten()
-            y = record['y'][0, 0].flatten()
-            t = record['t'][0, 0].flatten()
-            valid = (x != -32768) & (y != -32768)
-            gaze_data.append({
-                'x': x[valid] / np.max(x[valid]),
-                'y': y[valid] / np.max(y[valid]),
-                't': t[valid] - t[valid][0]
-            })
-    return gaze_data
+# ตัวอย่างจุด
+points = np.array([
+    [150, 200], [160, 220], [170, 210], [180, 230], [190, 250],
+    [200, 240], [210, 220], [220, 200], [230, 190], [240, 210]
+])
 
-st.set_page_config(page_title="Gaze Viewer", layout="centered")
-st.title("🎯 Gaze Point Overlay on Video")
+# กำหนดพื้นหลังเป็นภาพเปล่า
+frame = np.ones((400, 600, 3), dtype=np.uint8) * 255
 
-clip_options = ["APPAL_2a"]
-clip_name = st.selectbox("เลือกวิดีโอ", clip_options)
+# ฟังก์ชันวาด convex hull
+def draw_convex_hull(img, pts, color, fill_alpha=0.2):
+    if len(pts) >= 3:
+        hull = ConvexHull(pts)
+        hull_pts = pts[hull.vertices]
+        overlay = img.copy()
+        cv2.fillPoly(overlay, [hull_pts], color)
+        return cv2.addWeighted(overlay, fill_alpha, img, 1 - fill_alpha, 0)
+    return img
 
-video_path = f"Clips (small size)/{clip_name}_c.mp4"
-cap = cv2.VideoCapture(video_path)
-if not cap.isOpened():
-    st.error("ไม่สามารถโหลดวิดีโอได้")
-    st.stop()
+# ฟังก์ชันสร้าง concave hull
+def alpha_shape(points, alpha):
+    if len(points) < 4:
+        return MultiPoint(points).convex_hull
 
-fps = cap.get(cv2.CAP_PROP_FPS)
-total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    tri = Delaunay(points)
+    edges = set()
+    edge_points = []
 
-gaze_data = load_gaze_data_from_folder(f"clips_folder/{clip_name}")
+    for ia, ib, ic in tri.simplices:
+        pa, pb, pc = points[ia], points[ib], points[ic]
+        a, b, c = np.linalg.norm(pb - pa), np.linalg.norm(pc - pb), np.linalg.norm(pa - pc)
+        s = (a + b + c) / 2.0
+        area = np.sqrt(max(s * (s - a) * (s - b) * (s - c), 0))
+        if area == 0:
+            continue
+        circum_r = a * b * c / (4.0 * area)
+        if circum_r < 1.0 / alpha:
+            edges.update([(ia, ib), (ib, ic), (ic, ia)])
 
-if "frame_number" not in st.session_state:
-    st.session_state.frame_number = 0
+    for i, j in edges:
+        edge_points.append(LineString([points[i], points[j]]))
 
-col1, col_spacer, col3 = st.columns([1, 6, 1])
-with col1:
-    if st.button("Back"):
-        st.session_state.frame_number = max(0, st.session_state.frame_number - 50)
-with col3:
-    if st.button("Next"):
-        st.session_state.frame_number = min(total_frames - 1, st.session_state.frame_number + 50)
+    mls = MultiLineString(edge_points)
+    return unary_union(list(polygonize(mls)))  # ✅ แก้ไขตรงนี้
 
-frame_number = st.slider("เลือกตำแหน่งเฟรม", 0, total_frames - 1, st.session_state.frame_number, key="slider")
-st.session_state.frame_number = frame_number
+# วาดจุด gaze
+for (x, y) in points:
+    cv2.circle(frame, (x, y), 6, (0, 0, 255), -1)
 
-cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
-ret, frame = cap.read()
-cap.release()
+# วาด convex hull สีน้ำเงิน
+frame = draw_convex_hull(frame, points, color=(255, 0, 0), fill_alpha=0.2)
 
-if not ret:
-    st.error("ไม่สามารถโหลดเฟรมวิดีโอได้")
-    st.stop()
+# วาด concave hull สีแดง
+concave = alpha_shape(points, alpha=0.03)
+if concave.geom_type == 'Polygon':
+    coords = np.array(concave.exterior.coords).astype(np.int32)
+    overlay = frame.copy()
+    cv2.fillPoly(overlay, [coords], color=(0, 0, 255))
+    frame = cv2.addWeighted(overlay, 0.2, frame, 0.8, 0)
 
-for viewer in gaze_data:
-    indices = (viewer['t'] / 1000 * fps).astype(int)
-    idx = np.where(np.abs(indices - frame_number) <= 1)[0]
-    for i in idx:
-        gx = int(np.clip(viewer['x'][i], 0, 1) * (w - 1))
-        gy = int(np.clip(viewer['y'][i], 0, 1) * (h - 1))
-        cv2.circle(frame, (gx, gy), 5, (0, 0, 255), -1)
-
-st.image(Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)), caption=f"Frame {frame_number}")
+# แสดงผล
+img_pil = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+plt.figure(figsize=(10, 6))
+plt.imshow(img_pil)
+plt.axis('off')
+plt.title("🔵 Convex (Blue) | 🔴 Concave (Red)")
+plt.tight_layout()
+plt.show()
