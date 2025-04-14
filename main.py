@@ -1,25 +1,23 @@
-import streamlit as st
-import cv2
 import os
+import cv2
 import numpy as np
 import scipy.io
-from PIL import Image
 from scipy.spatial import ConvexHull, Delaunay
 from shapely.geometry import MultiPoint, LineString, MultiLineString
 from shapely.ops import unary_union, polygonize
+from PIL import Image
+import streamlit as st
 
-# 🎯 สร้าง concave hull จาก alpha shape
-def alpha_shape(points, alpha):
+# 🎯 ฟังก์ชันสร้าง concave hull ด้วย alpha shape
+def alpha_shape(points, alpha=0.03):
     if len(points) < 4:
         return MultiPoint(points).convex_hull
     try:
         tri = Delaunay(points, qhull_options='QJ')
-    except Exception as e:
+    except Exception:
         return MultiPoint(points).convex_hull
-
     edges = set()
     edge_points = []
-
     for ia, ib, ic in tri.simplices:
         pa, pb, pc = points[ia], points[ib], points[ic]
         a, b, c = np.linalg.norm(pb - pa), np.linalg.norm(pc - pb), np.linalg.norm(pa - pc)
@@ -27,17 +25,15 @@ def alpha_shape(points, alpha):
         area = max(s * (s - a) * (s - b) * (s - c), 0)
         if area == 0:
             continue
-        area = np.sqrt(area)
-        circum_r = a * b * c / (4.0 * area)
+        circum_r = a * b * c / (4.0 * np.sqrt(area))
         if circum_r < 1.0 / alpha:
             edges.update([(ia, ib), (ib, ic), (ic, ia)])
-
     for i, j in edges:
         edge_points.append(LineString([points[i], points[j]]))
-
     mls = MultiLineString(edge_points)
     return unary_union(list(polygonize(mls)))
 
+# 📦 โหลดข้อมูลการมอง
 @st.cache_data
 def load_gaze_data_from_folder(folder_path):
     gaze_data = []
@@ -56,6 +52,7 @@ def load_gaze_data_from_folder(folder_path):
             })
     return gaze_data
 
+# 🖼️ UI
 st.set_page_config(page_title="Gaze Viewer", layout="centered")
 st.title("🎯 Gaze Point Overlay on Video")
 
@@ -72,31 +69,32 @@ fps = cap.get(cv2.CAP_PROP_FPS)
 total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-
 gaze_data = load_gaze_data_from_folder(f"clips_folder/{clip_name}")
 
 if "frame_number" not in st.session_state:
     st.session_state.frame_number = 0
 
+# ปุ่มควบคุม
 col1, col_spacer, col3 = st.columns([1, 6, 1])
 with col1:
-    if st.button("⬅️ Back"):
+    if st.button("⬅ Back"):
         st.session_state.frame_number = max(0, st.session_state.frame_number - 50)
 with col3:
-    if st.button("Next ➡️"):
+    if st.button("Next ➡"):
         st.session_state.frame_number = min(total_frames - 1, st.session_state.frame_number + 50)
 
 frame_number = st.slider("เลือกตำแหน่งเฟรม", 0, total_frames - 1, st.session_state.frame_number, key="slider")
 st.session_state.frame_number = frame_number
 
+# ดึงเฟรม
 cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
 ret, frame = cap.read()
 cap.release()
-
 if not ret:
     st.error("ไม่สามารถโหลดเฟรมวิดีโอได้")
     st.stop()
 
+# 🔴 พล็อตจุดการมอง
 gaze_points_in_frame = []
 for viewer in gaze_data:
     indices = (viewer['t'] / 1000 * fps).astype(int)
@@ -107,23 +105,23 @@ for viewer in gaze_data:
         gaze_points_in_frame.append((gx, gy))
         cv2.circle(frame, (gx, gy), 5, (0, 0, 255), -1)
 
+# 🔺 วาดเส้น hull
 points = np.array(gaze_points_in_frame)
 points = np.unique(points, axis=0)
-
 if len(points) >= 3:
     try:
         hull = ConvexHull(points)
-        convex_pts = points[hull.vertices]
-        cv2.polylines(frame, [convex_pts.reshape((-1, 1, 2))], isClosed=True, color=(0, 0, 255), thickness=2)
-    except Exception as e:
-        print(f"Convex error: {e}")
+        cv2.polylines(frame, [points[hull.vertices].reshape((-1, 1, 2))], isClosed=True, color=(0, 0, 255), thickness=2)
+    except:
+        pass
 
     try:
-        concave = alpha_shape(points, alpha=0.01)
+        concave = alpha_shape(points, alpha=0.02)
         if concave and concave.geom_type == 'Polygon':
             exterior = np.array(concave.exterior.coords).astype(np.int32)
-            cv2.polylines(frame, [exterior.reshape((-1, 1, 2))], isClosed=True, color=(255, 0, 0), thickness=2)
+            cv2.polylines(frame, [exterior.reshape((-1, 1, 2))], isClosed=True, color=(0, 255, 255), thickness=2)
     except Exception as e:
-        print(f"Concave error: {e}")
+        st.warning(f"⚠️ Concave error: {e}")
 
+# แสดงภาพ
 st.image(Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)), caption=f"Frame {frame_number}")
