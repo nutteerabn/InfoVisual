@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
+import gdown
 
 def get_convex_concave_data(clip_name):
-    # 🔁 ในเวอร์ชันจริงคุณจะโหลด .mat และวิเคราะห์จริง
-    # ตัวอย่าง dummy data
+    # 🔁 ตัวอย่าง dummy data
     frames = np.arange(0, 100)
     convex = np.random.uniform(300, 500, size=100)
     concave = convex - np.random.uniform(50, 150, size=100)
@@ -15,3 +15,7 @@ def get_convex_concave_data(clip_name):
     }).set_index('Frame')
 
     return df
+
+def download_from_gdrive(file_id, output_path):
+    url = f'https://drive.google.com/uc?id={file_id}'
+    gdown.download(url, output_path, quiet=False)
