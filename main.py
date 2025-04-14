@@ -8,7 +8,7 @@ from scipy.spatial import ConvexHull, Delaunay
 from shapely.geometry import MultiPoint, LineString, MultiLineString
 from shapely.ops import unary_union, polygonize
 
-# ฟังก์ชันสร้าง concave hull
+# สร้าง concave hull
 def alpha_shape(points, alpha=0.007):
     if len(points) < 4:
         return MultiPoint(points).convex_hull
@@ -32,7 +32,7 @@ def alpha_shape(points, alpha=0.007):
         edge_points.append(LineString([points[i], points[j]]))
     return unary_union(polygonize(MultiLineString(edge_points)))
 
-# โหลดข้อมูล gaze
+# โหลด gaze data
 @st.cache_data
 def load_gaze_data_from_folder(folder_path):
     gaze_data = []
@@ -51,13 +51,18 @@ def load_gaze_data_from_folder(folder_path):
             })
     return gaze_data
 
-# เริ่มหน้า Streamlit
+# หน้า Streamlit
 st.set_page_config(page_title="Gaze Viewer", layout="centered")
 st.title("🎯 Gaze Point Overlay on Video")
 
 clip_name = st.selectbox("เลือกวิดีโอ", ["APPAL_2a"])
 
 video_path = f"Clips (small size)/{clip_name}_c.mp4"
+
+# 🔹 วิดีโอต้นฉบับ (ด้านบน)
+with open(video_path, 'rb') as video_file:
+    st.video(video_file.read())
+
 cap = cv2.VideoCapture(video_path)
 if not cap.isOpened():
     st.error("ไม่สามารถโหลดวิดีโอได้")
@@ -73,12 +78,12 @@ gaze_data = load_gaze_data_from_folder(f"clips_folder/{clip_name}")
 if "frame_number" not in st.session_state:
     st.session_state.frame_number = 0
 
-col1, col_spacer, col3 = st.columns([1, 6, 1])
+col1, _, col3 = st.columns([1, 6, 1])
 with col1:
-    if st.button("Back"):
+    if st.button("⬅ Back"):
         st.session_state.frame_number = max(0, st.session_state.frame_number - 50)
 with col3:
-    if st.button("Next"):
+    if st.button("Next ➡"):
         st.session_state.frame_number = min(total_frames - 1, st.session_state.frame_number + 50)
 
 frame_number = st.slider("เลือกตำแหน่งเฟรม", 0, total_frames - 1, st.session_state.frame_number, key="slider")
@@ -92,6 +97,7 @@ if not ret:
     st.error("ไม่สามารถโหลดเฟรมวิดีโอได้")
     st.stop()
 
+# 🔸 วาด gaze point
 gaze_points = []
 for viewer in gaze_data:
     indices = (viewer['t'] / 1000 * fps).astype(int)
@@ -102,20 +108,21 @@ for viewer in gaze_data:
         gaze_points.append((gx, gy))
         cv2.circle(frame, (gx, gy), 4, (0, 0, 255), -1)
 
+# 🔸 วาด convex และ concave
 points = np.array(gaze_points)
 points = np.unique(points, axis=0)
-
 if len(points) >= 3:
     try:
         hull = ConvexHull(points)
         hull_pts = points[hull.vertices].reshape((-1, 1, 2))
-        cv2.polylines(frame, [hull_pts], isClosed=True, color=(0, 255, 0), thickness=2)
+        cv2.polylines(frame, [hull_pts], isClosed=True, color=(0, 255, 0), thickness=2)  # Green
 
         concave = alpha_shape(points, alpha=0.007)
         if concave and concave.geom_type == 'Polygon':
             exterior = np.array(concave.exterior.coords).astype(np.int32)
-            cv2.polylines(frame, [exterior.reshape((-1, 1, 2))], isClosed=True, color=(255, 0, 0), thickness=2)
+            cv2.polylines(frame, [exterior.reshape((-1, 1, 2))], isClosed=True, color=(255, 0, 0), thickness=2)  # Blue
     except Exception as e:
         st.warning(f"Hull error: {e}")
 
+# 🔸 แสดงผลภาพ
 st.image(Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)), caption=f"Frame {frame_number}")
