@@ -55,11 +55,11 @@ if "frame_number" not in st.session_state:
 # ⏮⏭️ Buttons
 col1, col_spacer, col3 = st.columns([1, 8, 1])
 with col1:
-    if st.button("⏮ Previous"):
-        st.session_state.frame_number = max(0, st.session_state.frame_number - 20)
+    if st.button("Previous"):
+        st.session_state.frame_number = max(0, st.session_state.frame_number - 50)
 with col3:
-    if st.button("Next ⏭️"):
-        st.session_state.frame_number = min(max_frame, st.session_state.frame_number + 20)
+    if st.button("Next"):
+        st.session_state.frame_number = min(max_frame, st.session_state.frame_number + 50)
 
 # 🎚️ Slider
 frame_number = st.slider("เลือกตำแหน่งเฟรม", 0, max_frame, st.session_state.frame_number)
