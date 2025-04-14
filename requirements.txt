@@ -1,7 +1,6 @@
 streamlit
-numpy
 pandas
-opencv-python
-matplotlib
-shapely
+numpy
 scipy
+Pillow
+opencv-python-headless
