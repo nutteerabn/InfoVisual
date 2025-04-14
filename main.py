@@ -1,20 +1,30 @@
 import streamlit as st
-import streamlit.components.v1 as components
+from utils import download_video_from_drive
+import os
 
-# วิดีโอจาก Google Drive (ใช้ ID -> preview)
-video_ids = {
+# 📦 วิดีโอใน Google Drive (ใช้ File ID)
+video_files = {
     "APPAL_2a": "1hJXZmnYPEWjCVBapWU2QRKBvOTt3yqzo",
     "Cloud_17a": "1rehRu2sIywGqHFfypJOl-F7FD34bwxK_"
 }
 
-st.title("🎥 ดูวิดีโอจาก Google Drive")
+# 📌 สร้างโฟลเดอร์เก็บวิดีโอที่โหลดมา
+if not os.path.exists("videos"):
+    os.makedirs("videos")
 
-# Dropdown
-selected = st.selectbox("เลือกวิดีโอ", list(video_ids.keys()))
+st.title("🎥 Video Player with Slider Control")
 
-if selected:
-    file_id = video_ids[selected]
-    embed_url = f"https://drive.google.com/file/d/{file_id}/preview"
+# 🔽 dropdown
+selected = st.selectbox("เลือกวิดีโอ", list(video_files.keys()))
+file_id = video_files[selected]
+video_path = f"videos/{selected}.mp4"
 
-    st.subheader(f"วิดีโอ: {selected}")
-    components.iframe(embed_url, height=480, width=800)
+# 📥 ดาวน์โหลดถ้ายังไม่มี
+if not os.path.exists(video_path):
+    with st.spinner("📥 กำลังดาวน์โหลดวิดีโอ..."):
+        download_video_from_drive(file_id, video_path)
+
+# 🎬 แสดงวิดีโอ
+st.video(video_path)
+
+# (Optional) 🎚 Slider สำหรับเวลา (แต่ Streamlit ยังไม่สามารถ sync ได้ตรงๆ กับวิดีโอ)
