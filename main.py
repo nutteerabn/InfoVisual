@@ -1,17 +1,20 @@
 import streamlit as st
 
-# วิดีโอ raw URL จาก GitHub
+# ดิกชันนารีเก็บลิงก์วิดีโอที่ใช้ raw.githubusercontent.com
 video_urls = {
-    "APPAL_2a": "https://raw.githubusercontent.com/your-username/InfoVisual/main/Clips%20(small%20size)/APPAL_2a_c.mov",
-    "NANN_3a": "https://raw.githubusercontent.com/your-username/InfoVisual/main/Clips%20(small%20size)/NANN_3a_c.mov"
+    "APPAL_2a": "https://raw.githubusercontent.com/your-username/InfoVisual/main/Clips%20(small%20size)/APPAL_2a_c.mp4",
+    "NANN_3a": "https://raw.githubusercontent.com/your-username/InfoVisual/main/Clips%20(small%20size)/NANN_3a_c.mp4"
 }
 
-# 🌟 ชื่อคลิป
+st.title("🎥 Gaze Video Viewer Dashboard")
+
+# ✅ เลือกวิดีโอ
 selected = st.selectbox("เลือกวิดีโอ", list(video_urls.keys()))
-video_url = video_urls[selected]
 
-# 🔘 slider ควบคุมตำแหน่งวิดีโอ (เป็นวินาที สมมุติความยาว 60 วินาที)
-time = st.slider("เลื่อนเวลา", min_value=0, max_value=60, value=0)
+if selected:
+    video_url = video_urls[selected]
+    st.subheader(f"วิดีโอ: {selected}")
+    st.video(video_url)
 
-# 🎥 แสดงวิดีโอ
-st.video(video_url, start_time=time)
+    # ✅ เพิ่ม Slider ที่แสดง frame (ยังไม่เชื่อมกับ video player)
+    st.slider("⏱️ เลือกตำแหน่ง (Frame)", min_value=0, max_value=500, value=0, step=1)
