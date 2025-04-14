@@ -49,3 +49,57 @@ def load_gaze_data_from_folder(folder_path):
                 't': timestamps
             })
     return gaze_data_per_viewer
+
+import os
+import scipy.io
+import numpy as np
+import math
+from shapely.geometry import MultiPoint, LineString, MultiLineString
+from shapely.ops import unary_union, polygonize
+from scipy.spatial import ConvexHull, Delaunay
+
+def load_gaze_data_from_folder(folder_path):
+    gaze_data = []
+    for filename in os.listdir(folder_path):
+        if filename.endswith(".mat"):
+            data = scipy.io.loadmat(os.path.join(folder_path, filename))
+            record = data['eyetrackRecord']
+            x = record['x'][0, 0].flatten()
+            y = record['y'][0, 0].flatten()
+            t = record['t'][0, 0].flatten()
+            valid = (x != -32768) & (y != -32768)
+            gaze_data.append({
+                'x': x[valid] / np.max(x[valid]),
+                'y': y[valid] / np.max(y[valid]),
+                't': t[valid] - t[valid][0]
+            })
+    return gaze_data
+
+def alpha_shape(points, alpha):
+    if len(points) < 4:
+        return MultiPoint(points).convex_hull
+
+    try:
+        tri = Delaunay(points, qhull_options='QJ')
+    except Exception:
+        return MultiPoint(points).convex_hull
+
+    edges = set()
+    edge_points = []
+
+    for ia, ib, ic in tri.simplices:
+        pa, pb, pc = points[ia], points[ib], points[ic]
+        a, b, c = np.linalg.norm(pb - pa), np.linalg.norm(pc - pb), np.linalg.norm(pa - pc)
+        s = (a + b + c) / 2.0
+        area = math.sqrt(max(s * (s - a) * (s - b) * (s - c), 0))
+        if area == 0:
+            continue
+        circum_r = a * b * c / (4.0 * area)
+        if circum_r < 1.0 / alpha:
+            edges.update([(ia, ib), (ib, ic), (ic, ia)])
+
+    for i, j in edges:
+        edge_points.append(LineString([points[i], points[j]]))
+
+    mls = MultiLineString(edge_points)
+    return unary_union(list(polygonize(mls)))
