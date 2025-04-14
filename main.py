@@ -1,27 +1,53 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
-st.title("🎬 Gaze Video Viewer Dashboard")
+st.set_page_config(layout="centered")
+st.title("🎬 Gaze Video Viewer Dashboard (Interactive Slider)")
 
-# วิดีโอ (raw GitHub URLs)
+# ✅ GitHub video URLs (must be raw and streamable)
 video_links = {
     "APPAL_2a": "https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/Clips%20(small%20size)/APPAL_2a_c.mp4",
     "NANN_3a": "https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/Clips%20(small%20size)/NANN_3a_c.mp4"
 }
 
-# ความยาววิดีโอ (ประมาณคร่าว ๆ ในวินาที)
-video_durations = {
-    "APPAL_2a": 60,  # ตัวอย่าง: 60 วินาที
-    "NANN_3a": 45
-}
+# ✅ Dropdown
+selected = st.selectbox("เลือกวิดีโอ", list(video_links.keys()))
+video_url = video_links[selected]
 
-# ✅ dropdown เลือกวิดีโอ
-selected_video = st.selectbox("เลือกวิดีโอ", list(video_links.keys()))
-video_url = video_links[selected_video]
-duration = video_durations[selected_video]
+# ✅ ฝัง HTML + JS
+html_code = f"""
+<!DOCTYPE html>
+<html>
+<body>
 
-# 🎚 slider ควบคุมวิดีโอ (วินาที)
-time_selected = st.slider("⏱ เลือกตำแหน่ง (วินาที)", min_value=0, max_value=duration, step=1, value=0)
+<video id="myVideo" width="700" controls>
+  <source src="{video_url}" type="video/mp4">
+  Your browser does not support HTML video.
+</video>
 
-# 🎥 แสดงวิดีโอจากเวลาที่เลือก
-st.subheader(f"วิดีโอ: {selected_video} (เริ่มที่ {time_selected} วินาที)")
-st.video(video_url, start_time=time_selected)
+<br>
+<input type="range" id="slider" min="0" value="0" step="0.1" style="width: 700px;" />
+
+<script>
+  const video = document.getElementById("myVideo");
+  const slider = document.getElementById("slider");
+
+  video.addEventListener('loadedmetadata', function() {{
+    slider.max = video.duration;
+  }});
+
+  video.ontimeupdate = function() {{
+    slider.value = video.currentTime;
+  }};
+
+  slider.oninput = function() {{
+    video.currentTime = slider.value;
+  }};
+</script>
+
+</body>
+</html>
+"""
+
+# ✅ แสดงใน Streamlit
+components.html(html_code, height=500)
