@@ -1,30 +1,17 @@
 import streamlit as st
-from utils import download_video_from_drive
-import os
 
-# 📦 วิดีโอใน Google Drive (ใช้ File ID)
-video_files = {
-    "APPAL_2a": "1hJXZmnYPEWjCVBapWU2QRKBvOTt3yqzo",
-    "Cloud_17a": "1rehRu2sIywGqHFfypJOl-F7FD34bwxK_"
+# วิดีโอ raw URL จาก GitHub
+video_urls = {
+    "APPAL_2a": "https://raw.githubusercontent.com/your-username/InfoVisual/main/Clips%20(small%20size)/APPAL_2a_c.mov",
+    "NANN_3a": "https://raw.githubusercontent.com/your-username/InfoVisual/main/Clips%20(small%20size)/NANN_3a_c.mov"
 }
 
-# 📌 สร้างโฟลเดอร์เก็บวิดีโอที่โหลดมา
-if not os.path.exists("videos"):
-    os.makedirs("videos")
+# 🌟 ชื่อคลิป
+selected = st.selectbox("เลือกวิดีโอ", list(video_urls.keys()))
+video_url = video_urls[selected]
 
-st.title("🎥 Video Player with Slider Control")
+# 🔘 slider ควบคุมตำแหน่งวิดีโอ (เป็นวินาที สมมุติความยาว 60 วินาที)
+time = st.slider("เลื่อนเวลา", min_value=0, max_value=60, value=0)
 
-# 🔽 dropdown
-selected = st.selectbox("เลือกวิดีโอ", list(video_files.keys()))
-file_id = video_files[selected]
-video_path = f"videos/{selected}.mp4"
-
-# 📥 ดาวน์โหลดถ้ายังไม่มี
-if not os.path.exists(video_path):
-    with st.spinner("📥 กำลังดาวน์โหลดวิดีโอ..."):
-        download_video_from_drive(file_id, video_path)
-
-# 🎬 แสดงวิดีโอ
-st.video(video_path)
-
-# (Optional) 🎚 Slider สำหรับเวลา (แต่ Streamlit ยังไม่สามารถ sync ได้ตรงๆ กับวิดีโอ)
+# 🎥 แสดงวิดีโอ
+st.video(video_url, start_time=time)
