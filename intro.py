@@ -23,7 +23,7 @@ with tab1:
     st.subheader("🎯 Goal of This Visualization")
 
     st.markdown("""
-<blockquote style="font-size: 1.15em; text-align: center; font-weight: bold; font-style: italic; border-left: 4px solid #999; padding-left: 1em; margin: 1.5em 0;">
+<blockquote style="font-size: 1em; text-align: center; font-weight: bold; font-style: italic; border-left: 4px solid #999; padding-left: 1em; margin: 1.5em 0;">
     “Is the viewer’s attention firmly focused on key moments,<br>
     or does it float, drifting between different scenes in search of something new?”
 </blockquote>
