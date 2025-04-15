@@ -27,7 +27,7 @@ with tab1:
     """)
 
 with tab2:
-    st.subheader("🌀 Convex & Concave Hull")
+    st.subheader("🌀 Convex & Concave Hull Concept")
 
     st.write("To analyze visual attention, we enclose gaze points with geometric boundaries:")
 
