@@ -24,15 +24,15 @@ with tab1:
 
     st.markdown("""
 <blockquote style="
-    font-size: 1em;
+    font-size: 1.1em;
     text-align: center;
     font-weight: bold;
     font-style: italic;
-    border-left: 4px solid #999;
-    background-color: #fff8dc;  /* สีเหลืองอ่อน */
+    border-left: 6px solid #f9a825;
+    background-color: #fff8dc;
     padding: 1em;
     margin: 1.5em 0;
-">
+    border-radius: 6px;">
     “Is the viewer’s attention firmly focused on key moments,<br>
     or does it float, drifting between different scenes in search of something new?”
 </blockquote>
