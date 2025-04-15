@@ -7,41 +7,42 @@ st.title("🌟 Understanding Viewer Focus Through Gaze Visualization")
 
 import streamlit as st
 
-# SECTION 1: Hook - With styled background including image
-st.markdown(
-    """
-    <div style="background-color: #fff8dc; padding: 25px; border-radius: 10px; margin-bottom: 30px;">
-        <h2 style="font-size: 1.8em; font-weight: bold;">📌 What Captures Attention?</h2>
+import streamlit as st
 
-        <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/conclip/Image.jpeg"
-             style="width: 100%; border-radius: 8px; margin-bottom: 20px;" />
+st.set_page_config(layout="wide")
 
-        <blockquote style="
-            font-size: 1.05em;
-            text-align: center;
-            font-weight: bold;
-            font-style: italic;
-            border-left: 6px solid #f9a825;
-            background-color: #fffde7;
-            padding: 1em;
-            margin: 1.5em 0;
-            border-radius: 6px;">
-            “Is the viewer’s attention firmly focused on key moments,<br>
-            or does it float, drifting between different scenes in search of something new?”
-        </blockquote>
+# SECTION 1: What Captures Attention?
+st.markdown("""
+<div style="background-color: #fff8dc; padding: 25px; border-radius: 10px; margin-bottom: 30px;">
+    <h2 style="font-size: 1.8em; font-weight: bold;">📌 What Captures Attention?</h2>
 
-        <p style="font-size: 1.05em;">
-            The goal of this visualization is to understand how viewers engage with a video by examining where and how they focus their attention.
-            By comparing the areas where viewers look (represented by convex and concave hulls), the visualization highlights whether their attention stays focused on a specific part of the video or shifts around.
-        </p>
+    <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/conclip/Image.jpeg"
+         style="width: 100%; border-radius: 8px; margin-bottom: 20px;" />
 
-        <p style="font-size: 1.05em;">
-            Ultimately, this visualization helps us uncover patterns of focus and exploration, providing insights into how viewers interact with different elements of the video.
-        </p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+    <blockquote style="
+        font-size: 1.05em;
+        text-align: center;
+        font-weight: bold;
+        font-style: italic;
+        border-left: 6px solid #f9a825;
+        background-color: #fffde7;
+        padding: 1em;
+        margin: 1.5em 0;
+        border-radius: 6px;">
+        “Is the viewer’s attention firmly focused on key moments,<br>
+        or does it float, drifting between different scenes in search of something new?”
+    </blockquote>
+
+    <p style="font-size: 1.05em;">
+        The goal of this visualization is to understand how viewers engage with a video by examining where and how they focus their attention.
+        By comparing the areas where viewers look (represented by convex and concave hulls), the visualization highlights whether their attention stays focused on a specific part of the video or shifts around.
+    </p>
+
+    <p style="font-size: 1.05em;">
+        Ultimately, this visualization helps us uncover patterns of focus and exploration, providing insights into how viewers interact with different elements of the video.
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
 # -------------------- 📐 SECTION 2 ---------------------
 st.markdown("""
