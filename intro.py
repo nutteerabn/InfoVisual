@@ -27,12 +27,12 @@ with tab1:
     """)
 
 with tab2:
-    st.subheader("📈 Convex & Concave Hull")
+    st.subheader("🌀 Convex & Concave Hull")
 
     st.write("To analyze visual attention, we enclose gaze points with geometric boundaries:")
 
     st.markdown("""
-    <div style='padding: 0.5em; background-color: #f8f9fa; border-left: 4px solid #4CAF50; margin: 1em 0'>
+    <div style='padding: 0.5em; background-color: #e6f0ff; border-left: 4px solid #1e88e5; margin: 1em 0'>
         <ul style='margin: 0; padding-left: 1.2em;'>
             <li><strong>Convex Hull</strong> wraps around all gaze points to show the overall extent of where viewers looked.</li>
             <li><strong>Concave Hull</strong> creates a tighter boundary that closely follows the actual shape of the gaze pattern, adapting to gaps and contours in the data.</li>
