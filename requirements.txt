@@ -1,8 +1,9 @@
 streamlit
 opencv-python-headless
 pandas
-numpy
 altair
+numpy
 scipy
 shapely
 alphashape
+requests
