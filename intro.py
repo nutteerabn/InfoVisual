@@ -24,7 +24,7 @@ with tab1:
 
     st.markdown("""
 <blockquote style="
-    font-size: 1.1em;
+    font-size: 1em;
     text-align: center;
     font-weight: bold;
     font-style: italic;
