@@ -70,7 +70,7 @@ st.markdown("""
 
 <h3>📊 Focus-Concentration (F-C) Score</h3>
 
-<img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/formula_image.jpeg"
+<img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/formula_F-C.jpeg"
      style="width: 100%; border-radius: 8px;" alt="Formula Example">
 
 <p style="font-size: 0.95em; text-align: center; color: #6c757d; font-style: italic; margin-top: 8px;">
