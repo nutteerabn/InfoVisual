@@ -113,3 +113,28 @@ import time
 placeholder = st.empty()
 time.sleep(1)
 placeholder.success("🎉 Helooooooo!")
+
+import streamlit as st
+
+st.markdown("""
+    <style>
+    @keyframes slideUp {
+        from {transform: translateY(30px); opacity: 0;}
+        to {transform: translateY(0); opacity: 1;}
+    }
+
+    .popup {
+        background-color: #fff9c4;
+        padding: 1rem;
+        margin-top: 20px;
+        border-left: 6px solid #fbc02d;
+        border-radius: 6px;
+        font-size: 1.1rem;
+        animation: slideUp 1s ease-out;
+    }
+    </style>
+
+    <div class="popup">
+        👀 Here's an attention-catching message that slides up!
+    </div>
+""", unsafe_allow_html=True)
