@@ -7,7 +7,7 @@ st.image("conclip/Image.jpeg", use_column_width=True)
 tab1, tab2, tab3, tab4 = st.tabs([
     "1. Visualization Goal", 
     "2. Convex & Concave Hull", 
-    "3. Focus Concentration (F-C) Score", 
+    "3. F-C Score", 
     "4. Interpretation"
 ])
 
@@ -27,7 +27,7 @@ with tab1:
     """)
 
 with tab2:
-    st.subheader("🌀 Convex & Concave Hull Concept")
+    st.subheader("📐 Convex & Concave Hull Concept")
 
     st.write("To analyze visual attention, we enclose gaze points with geometric boundaries:")
 
@@ -43,7 +43,7 @@ with tab2:
     st.write("The difference in area between them reveals how dispersed or concentrated the viewers’ gaze is.")
 
 with tab3:
-    st.subheader("📝 Focus Concentration (F-C) Score")
+    st.subheader("📊 Focus Concentration (F-C) Score")
     # 👁️ Insert dynamic visualization (e.g. video + hull overlays)
 
 with tab4:
