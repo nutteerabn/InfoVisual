@@ -15,10 +15,10 @@ tab1, tab2, tab3, tab4 = st.tabs([
 with tab1:
     st.subheader("🎯 Goal of This Visualization")
 
-  st.markdown("""
+    st.markdown("""
     > *“**Is the viewer’s attention firmly focused on key moments,  
-    > or does it float, drifting between different scenes in search of something new?**”* """, unsafe_allow_html=True)
-
+    > or does it float, drifting between different scenes in search of something new?**”*
+    """, unsafe_allow_html=True)
     st.write("""
     The goal of this visualization is to understand how viewers engage with a video by examining where and how they focus their attention. By comparing the areas where viewers look (represented by convex and concave hulls), the visualization highlights whether their attention stays focused on a specific part of the video or shifts around.
 
