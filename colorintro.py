@@ -7,7 +7,7 @@ st.image("conclip/Image.jpeg", use_container_width=True)
 
 # -------------------- 📌 SECTION 1 ---------------------
 st.markdown("""
-<div style="background-color: #e0f7fa; padding: 25px; border-radius: 10px; margin-top: 30px;">
+<div style="background-color: #B3D9FF; padding: 25px; border-radius: 10px; margin-top: 30px;">
 
 <blockquote style="
     font-size: 1.1em;
