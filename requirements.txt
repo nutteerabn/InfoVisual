@@ -4,6 +4,7 @@ numpy
 opencv-python-headless
 gdown
 scipy
-scipy
 shapely
 alphashape
+opencv-python
+altair
