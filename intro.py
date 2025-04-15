@@ -16,9 +16,12 @@ with tab1:
     st.subheader("🎯 Goal of This Visualization")
 
     st.markdown("""
-    > *“**Is the viewer’s attention firmly focused on key moments,  
-    > or does it float, drifting between different scenes in search of something new?**”*
-    """, unsafe_allow_html=True)
+<blockquote style="font-size: 1.15em; text-align: center; font-weight: bold; font-style: italic; border-left: 4px solid #999; padding-left: 1em; margin: 1.5em 0;">
+    “Is the viewer’s attention firmly focused on key moments,<br>
+    or does it float, drifting between different scenes in search of something new?”
+</blockquote>
+""", unsafe_allow_html=True)
+    
     st.write("""
     The goal of this visualization is to understand how viewers engage with a video by examining where and how they focus their attention. By comparing the areas where viewers look (represented by convex and concave hulls), the visualization highlights whether their attention stays focused on a specific part of the video or shifts around.
 
