@@ -89,8 +89,6 @@ st.markdown("""
 st.markdown("""
 <div style="background-color: #f3e5f5; padding: 25px; border-radius: 10px; margin-top: 30px;">
 
-<h3>🎥 Visual Examples of Focus</h3>
-
 <div style="display: flex; gap: 20px;">
     <div style="width: 50%;">
         <h4>High F-C Score</h4>
