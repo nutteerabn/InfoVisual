@@ -5,12 +5,6 @@ st.set_page_config(layout="wide")
 # -------------------- 🎯 TITLE ---------------------
 st.title("🌟 Understanding Viewer Focus Through Gaze Visualization")
 
-import streamlit as st
-
-import streamlit as st
-
-st.set_page_config(layout="wide")
-
 # SECTION 1: What Captures Attention?
 st.markdown("""
 <div style="background-color: #fff8dc; padding: 25px; border-radius: 10px; margin-bottom: 30px;">
