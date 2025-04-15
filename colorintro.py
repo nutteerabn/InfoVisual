@@ -96,22 +96,28 @@ st.markdown("""
 st.markdown("""
 <div style="background-color: #f3e5f5; padding: 25px; border-radius: 10px; margin-top: 30px;">
 
+<h3>🎥 Visual Examples of Focus</h3>
+
 <div style="display: flex; gap: 20px;">
     <div style="width: 50%;">
         <h4>High F-C Score</h4>
         <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/FOODI_2a_high_F-C_score.gif"
              style="width: 100%; border-radius: 8px;">
-        <p style="font-size: 0.95em; text-align: center;">Gaze remains tightly grouped in one region.</p>
+        <p style="font-size: 0.95em; text-align: center; color: #6c757d; font-style: italic;">
+            🔍 Gaze remains tightly grouped in one region.
+        </p>
     </div>
     <div style="width: 50%;">
         <h4>Low F-C Score</h4>
         <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/FOODI_2a_low_F-C_score.gif"
              style="width: 100%; border-radius: 8px;">
-        <p style="font-size: 0.95em; text-align: center;">Gaze jumps around, showing exploration or distraction.</p>
+        <p style="font-size: 0.95em; text-align: center; color: #6c757d; font-style: italic;">
+            👀 Gaze jumps around, showing exploration or distraction.
+        </p>
     </div>
 </div>
 
-<p style="font-size: 1.05em;">
+<p style="font-size: 1.05em; margin-top: 1.5em;">
     You’ll see this visualized dynamically in the graph and overlays as you explore different segments of the video.
 </p>
 
