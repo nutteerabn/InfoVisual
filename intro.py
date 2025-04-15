@@ -63,13 +63,14 @@ with tab3:
 with tab4:
     st.subheader("🎬 Example: High vs Low F-C Score")
 
-      <div style='padding: 0.7em; background-color: #f9f9f9; border-left: 5px solid #90caf9; margin: 1em 0; font-size: 1.05em'>
-         <ul style='margin: 0; padding-left: 1.2em;'>
-             <li><strong>High F-C Score</strong>: The viewer’s gaze remains focused in one tight area, suggesting <span style='color:#2e7d32'><strong>strong interest or attention</strong></span>.</li>
-             <li><strong>Low F-C Score</strong>: The gaze is scattered, moving across many regions of the screen, indicating <span style='color:#c62828'><strong>exploration or distraction</strong></span>.</li>
-         </ul>
-     </div>
-     """, unsafe_allow_html=True)
+    st.markdown("""
+    <div style='padding: 0.7em; background-color: #f9f9f9; border-left: 5px solid #90caf9; margin: 1em 0; font-size: 1.05em'>
+        <ul style='margin: 0; padding-left: 1.2em;'>
+            <li><strong>High F-C Score</strong>: The viewer’s gaze remains focused in one tight area, suggesting <span style='color:#2e7d32'><strong>strong interest or attention</strong></span>.</li>
+            <li><strong>Low F-C Score</strong>: The gaze is scattered, moving across many regions of the screen, indicating <span style='color:#c62828'><strong>exploration or distraction</strong></span>.</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.write("You can observe this difference visually in the graph and video overlays as you explore different frames.")
 
