@@ -6,11 +6,8 @@ st.set_page_config(layout="wide")
 st.title("🌟 Understanding Viewer Focus Through Gaze Visualization")
 
 # -------------------- 📌 SECTION 1 ---------------------
-# -------------------- 📌 SECTION 1 ---------------------
 st.markdown("""
 <div style="background-color: #fffde7; padding: 25px; border-radius: 10px; margin-top: 30px;">
-
-<h2 style="font-size: 1.8em; font-weight: bold;">📌 What Captures Attention?</h2>
 
 <blockquote style="
     font-size: 1.1em;
@@ -50,7 +47,7 @@ st.markdown("""
 
 <div style="display: flex; gap: 20px;">
     <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/convex_concave_image.jpg"
-         style="width: 48%; border-radius: 8px;" alt="Diagram of Convex and Concave Hulls">
+         style="width: 30%; border-radius: 8px;" alt="Diagram of Convex and Concave Hulls">
     <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/convex_concave_SIMPS_9a.gif"
          style="width: 48%; border-radius: 8px;" alt="Gaze Boundaries Example">
 </div>
