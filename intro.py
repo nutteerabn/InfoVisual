@@ -4,7 +4,7 @@ import streamlit as st
 st.set_page_config(page_title="Understanding Viewer Focus", layout="wide")
 
 # --- แสดงภาพแทนหัวข้อ ---
-st.image("conclip/Understanding Viewer Focus Through Gaze Visualization (1).png", use_column_width=True)
+st.image("conclip/Image.jpeg", use_column_width=True)
 
 # --- Introduction ---
 st.markdown("""
