@@ -22,7 +22,7 @@ tab1, tab2, tab3, tab4 = st.tabs([
 with tab1:
     st.subheader("🎯 Goal of This Visualization")
 
-    sst.markdown("""
+    st.markdown("""
 <blockquote style="
     font-size: 1em;
     text-align: center;
