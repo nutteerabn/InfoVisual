@@ -16,8 +16,8 @@ with tab1:
     st.subheader("🎯 Goal of This Visualization")
 
     st.markdown("""
-    > *“Is the viewer’s attention firmly focused on key moments,  
-    > or does it float, drifting between different scenes in search of something new?”*
+    > *“**Is the viewer’s attention firmly focused on key moments,  
+    > or does it float, drifting between different scenes in search of something new?**”*
     """, unsafe_allow_html=True)
 
     st.write("""
