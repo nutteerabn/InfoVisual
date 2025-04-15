@@ -46,7 +46,7 @@ st.markdown("""
 <p style="font-size: 1.05em;">👉 The <b>difference in area</b> between the two tells us how spread out or concentrated the gaze is.</p>
 
 <div style="display: flex; gap: 20px; align-items: flex-start;">
-    <div style="width: 40%;">
+    <div style="width: 50%;">
         <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/convex_concave_image.jpg"
              style="width: 100%; border-radius: 8px;" alt="Diagram of Convex and Concave Hulls">
         <p style="font-size: 0.95em; text-align: center; margin-top: 8px;">📊 Diagram: Convex vs Concave Hulls</p>
