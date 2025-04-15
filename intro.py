@@ -27,12 +27,20 @@ with tab1:
     """)
 
 with tab2:
-    st.subheader("2. Convex & Concave Hull")
-    st.write("""
-    Convex Hull wraps all gaze points to show the outer boundary of visual spread.  
-    Concave Hull follows the true shape of gaze clusters more tightly.
-    Comparing their areas helps us quantify how focused or dispersed the gaze is.
-    """)
+    st.subheader("📈 Convex & Concave Hull")
+
+    st.write("To analyze visual attention, we enclose gaze points with geometric boundaries:")
+
+    st.markdown("""
+    <div style='padding: 0.5em; background-color: #f8f9fa; border-left: 4px solid #4CAF50; margin: 1em 0'>
+        <ul style='margin: 0; padding-left: 1.2em;'>
+            <li><strong>Convex Hull</strong> wraps around all gaze points to show the overall extent of where viewers looked.</li>
+            <li><strong>Concave Hull</strong> creates a tighter boundary that closely follows the actual shape of the gaze pattern, adapting to gaps and contours in the data.</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.write("The difference in area between them reveals how dispersed or concentrated the viewers’ gaze is.")
 
 with tab3:
     st.subheader("3. Visualization Example")
