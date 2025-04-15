@@ -3,14 +3,14 @@ import streamlit as st
 # --- Page Config ---
 st.set_page_config(page_title="Understanding Viewer Focus", layout="wide")
 
-# --- Title and Introduction ---
-st.title("🎯 Understanding Viewer Focus Through Gaze Visualization")
+# --- แสดงภาพแทนหัวข้อ ---
+st.image("conclip/Understanding Viewer Focus Through Gaze Visualization (1).png", use_column_width=True)
+
+# --- Introduction ---
 st.markdown("""
 This visualization explores how viewer attention is distributed during video watching.
 We analyze the difference between **Convex Hull** and **Concave Hull** areas surrounding gaze points
 to determine how focused or scattered the viewers' attention is.
-
-Use the controls below to explore real data and interactive graphics.
 """)
 
 # --- Section: 1. Explain Convex vs Concave Hull ---
