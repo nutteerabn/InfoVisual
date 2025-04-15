@@ -3,7 +3,7 @@ import streamlit as st
 st.set_page_config(layout="wide")
 
 # -------------------- 🎯 TITLE ---------------------
-st.title("🌟 Understanding Viewer Focus Through Gaze Visualization")
+st.image("conclip/Image.jpeg", use_container_width=True)
 
 # -------------------- 📌 SECTION 1 ---------------------
 st.markdown("""
@@ -66,7 +66,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 # -------------------- 📊 SECTION 3 ---------------------
 st.markdown("""
-<div style="background-color: #fff3e0; padding: 25px; border-radius: 10px; margin-top: 30px;">
+<div style="background-color: #f3e5f5; padding: 25px; border-radius: 10px; margin-top: 30px;">
 
 <h3>📊 Focus-Concentration (F-C) Score</h3>
 
