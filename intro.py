@@ -44,7 +44,21 @@ with tab2:
 
 with tab3:
     st.subheader("📊 Focus Concentration (F-C) Score")
-    # 👁️ Insert dynamic visualization (e.g. video + hull overlays)
+
+    st.write("""
+    The Focus Concentration Score (FCS) quantifies how focused or scattered a viewer's attention is during the video.
+    
+    It helps to measure whether attention is locked onto a specific spot or wandering across the frame.
+    """)
+
+    st.markdown("""
+    <div style='padding: 0.7em; background-color: #f0f8ff; border-left: 5px solid #1976d2; margin: 1em 0; font-size: 1.05em'>
+        <ul style='margin: 0; padding-left: 1.2em;'>
+            <li><strong>Score close to 1.0</strong> → Gaze is tightly grouped → <span style="color:#2e7d32;"><strong>High concentration</strong></span></li>
+            <li><strong>Score much lower than 1.0</strong> → Gaze is more spread out → <span style="color:#d32f2f;"><strong>Lower concentration / Exploration</strong></span></li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
 with tab4:
     st.subheader("4. Interpretation of the Score")
