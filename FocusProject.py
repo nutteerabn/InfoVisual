@@ -8,7 +8,6 @@ import scipy.io
 from io import BytesIO
 from scipy.spatial import ConvexHull
 import alphashape
-pip install opencv-python pandas altair alphashape shapely
 
 # ------------------------ CONFIG ------------------------
 st.set_page_config(page_title="Focus Dashboard", layout="wide")
