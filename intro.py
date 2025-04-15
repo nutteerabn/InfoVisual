@@ -8,7 +8,7 @@ tab1, tab2, tab3, tab4 = st.tabs([
     "1. Visualization Goal", 
     "2. Convex & Concave Hull", 
     "3. F-C Score", 
-    "4. Interpretation"
+    "4. Example: High vs Low F-C Score"
 ])
 
 # ⬅️ แท็บที่ 1 : Visualization Goal
@@ -61,7 +61,7 @@ with tab3:
 
 
 with tab4:
-    st.subheader("4. Interpretation of the Score")
+    st.subheader("🎬 Example: High vs Low F-C Score")
     st.write("""
     - Score near **1.0** → High concentration
     - Score closer to **0** → Scattered gaze / low attention
