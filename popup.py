@@ -13,10 +13,10 @@ st.markdown("""
     animation: slideUp 1s ease-out forwards;
     opacity: 0;
 }
-.section-1 { animation-delay: 0.2s; }
-.section-2 { animation-delay: 0.6s; }
-.section-3 { animation-delay: 1.0s; }
-.section-4 { animation-delay: 1.4s; }
+.section-1 { animation-delay: 0.5s; }
+.section-2 { animation-delay: 1.0s; }
+.section-3 { animation-delay: 2.0s; }
+.section-4 { animation-delay: 3.0s; }
 </style>
 """, unsafe_allow_html=True)
 
