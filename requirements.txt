@@ -2,9 +2,7 @@ streamlit
 pandas
 numpy
 opencv-python-headless
-gdown
 scipy
 shapely
 alphashape
-opencv-python
 altair
