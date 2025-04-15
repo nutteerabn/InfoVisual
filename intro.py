@@ -1,4 +1,11 @@
 import streamlit as st
+st.markdown("""
+    <style>
+        * {
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
 # หัวข้อรูปภาพด้านบน
 st.image("conclip/Image.jpeg", use_container_width=True)
