@@ -50,7 +50,7 @@ st.markdown("""
 
 # ---------- NAVIGATION -----------
 st.sidebar.markdown('<div class="sidebar-container">', unsafe_allow_html=True)
-selected = st.sidebar.radio("\U0001F4C1 Navigation", ["\U0001F4CA Gaze Visualization Info", "\U0001F3AC Video + Graph Dashboard"])
+selected = st.sidebar.radio("\U0001F4C1 Navigation", ["\U0001F4CA Introduction", "\U0001F3AC Visualization"])
 st.sidebar.markdown('</div>', unsafe_allow_html=True)
 
 # ---------- PAGE: GAZE INFO -----------
