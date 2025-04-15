@@ -46,10 +46,7 @@ with tab3:
     st.subheader("📊 Focus Concentration (F-C) Score")
 
     st.write("""
-    The Focus Concentration Score (FCS) quantifies how focused or scattered a viewer's attention is during the video.
-    
-    It helps to measure whether attention is locked onto a specific spot or wandering across the frame.
-    """)
+    The Focus Concentration Score (FCS) quantifies how focused or scattered a viewer's attention is during the video.""")
 
     st.markdown("""
     <div style='padding: 0.7em; background-color: #f0f8ff; border-left: 5px solid #1976d2; margin: 1em 0; font-size: 1.05em'>
@@ -59,6 +56,9 @@ with tab3:
         </ul>
     </div>
     """, unsafe_allow_html=True)
+    
+    st.write("It helps to measure whether attention is locked onto a specific spot or wandering across the frame.")
+
 
 with tab4:
     st.subheader("4. Interpretation of the Score")
