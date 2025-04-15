@@ -1,55 +1,38 @@
 import streamlit as st
 
-# --- Page Config ---
-st.set_page_config(page_title="Understanding Viewer Focus", layout="wide")
-
-# --- แสดงภาพแทนหัวข้อ ---
+# แสดงภาพหัวข้อ
 st.image("conclip/Image.jpeg", use_column_width=True)
 
-# --- Introduction ---
-st.markdown("""
-This visualization explores how viewer attention is distributed during video watching.
-We analyze the difference between **Convex Hull** and **Concave Hull** areas surrounding gaze points
-to determine how focused or scattered the viewers' attention is.
-""")
+# 🧭 แท็บเนื้อหาแต่ละพาร์ท
+tab1, tab2, tab3, tab4 = st.tabs(["1. Introduction", "2. Concept", "3. Visualization", "4. Interpretation"])
 
-# --- Section: 1. Explain Convex vs Concave Hull ---
-st.subheader("📐 Convex vs Concave Hull: What Do They Tell Us?")
-st.markdown("""
-- **Convex Hull** wraps all gaze points to capture the full boundary of visual spread.
-- **Concave Hull** forms a more adaptive shape, revealing the underlying gaze distribution pattern.
+with tab1:
+    st.subheader("1. Introduction")
+    st.write("Introduce the goal of this visualization...")
 
-> By comparing their areas, we can quantify the **focus score**, which reflects how concentrated the attention is.
-""")
+with tab2:
+    st.subheader("2. Convex & Concave Hull")
+    st.write("""
+    Convex Hull wraps all gaze points to show the outer boundary of visual spread.  
+    Concave Hull follows the true shape of gaze clusters more tightly.
+    Comparing their areas helps us quantify how focused or dispersed the gaze is.
+    """)
 
-# --- Section: 2. Video Examples and Gaze Overlay ---
-st.subheader("🎥 Example: Eye Tracking on Video")
-st.markdown("Select a clip to view gaze points overlay and focus pattern.")
+with tab3:
+    st.subheader("3. Visualization Example")
+    # 👁️ Insert dynamic visualization (e.g. video + hull overlays)
 
-# 🔽 Dropdown for selecting a video (to be connected with real data)
-selected_clip = st.selectbox("Choose a video clip", ["APPAL_2a", "MARCH_12a", "SIMPS_9a"])
+with tab4:
+    st.subheader("4. Interpretation of the Score")
+    st.write("""
+    - Score near **1.0** → High concentration
+    - Score closer to **0** → Scattered gaze / low attention
+    """)
 
-# 👁 Placeholder: embed or play the video
-st.video("path/to/sample_video.mp4")  # replace with real path later
-
-# --- Section: 3. Score Explanation ---
-st.subheader("🧠 Focus Score Explained")
-st.markdown("""
-The **Focus Score (F-C Score)** is calculated as the difference between convex and concave hull areas.
-
-- A score near **1.0** → tight attention (focused).
-- A score near **0.0** → widely scattered gaze (unfocused).
-
-""")
-
-# --- Section: 4. Visualizations ---
-st.subheader("📊 Gaze Spread and Focus Score Over Time")
-
-st.markdown("*(This section will contain convex vs concave area line charts, and score chart per frame)*")
-
-# 🔲 Placeholder for charts (e.g. Altair or matplotlib chart can be inserted here)
-st.info("📌 Chart coming soon...")
-
-# --- Footer ---
+# 🔻 พาร์ทที่ 5 และ 6 อยู่ด้านล่างแบบไม่อยู่ในแท็บ
 st.markdown("---")
-st.markdown("Created by your team – powered by Streamlit and Eye Tracking Analysis 💡")
+st.subheader("5. Graph: Focus-Score over Time")
+# 📈 Insert Altair/Plotly graph here
+
+st.subheader("6. Summary Insight")
+st.write("Summarize insight from graph or video patterns.")
