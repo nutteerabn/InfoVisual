@@ -15,7 +15,7 @@ st.markdown("""
     font-weight: bold;
     font-style: italic;
     border-left: 6px solid #f9a825;
-    background-color: #fff8dc;
+    background-color: #ECF0F1;
     padding: 1em;
     margin: 1.5em 0;
     border-radius: 6px;">
@@ -104,7 +104,7 @@ st.markdown("""
         <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/FOODI_2a_high_F-C_score.gif"
              style="width: 100%; border-radius: 8px;">
         <p style="font-size: 0.95em; text-align: center; color: #6c757d; font-style: italic;">
-            🔍 Gaze remains tightly grouped in one region.
+            Gaze remains tightly grouped in one region.
         </p>
     </div>
     <div style="width: 50%;">
@@ -112,7 +112,7 @@ st.markdown("""
         <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/FOODI_2a_low_F-C_score.gif"
              style="width: 100%; border-radius: 8px;">
         <p style="font-size: 0.95em; text-align: center; color: #6c757d; font-style: italic;">
-            👀 Gaze jumps around, showing exploration or distraction.
+            Gaze jumps around, showing exploration or distraction.
         </p>
     </div>
 </div>
