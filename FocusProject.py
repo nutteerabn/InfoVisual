@@ -5,46 +5,70 @@ import altair as alt
 import pandas as pd
 from utils import load_gaze_data, download_video, analyze_gaze
 
-# ----------- APP CONFIG -----------
-st.set_page_config(layout="wide")
+# ---------- PAGE CONFIG -----------
+st.set_page_config(page_title="Focus Dashboard", layout="wide")
 
-# ----------- SIDEBAR -----------
-st.sidebar.title("📁 Navigation")
-section = st.sidebar.radio("Go to", ["📊 Gaze Visualization Info", "🎬 Video + Graph Dashboard"])
-
-# ----------- STYLES -----------
+# ---------- CSS STYLE -----------
 st.markdown("""
-<style>
-@keyframes slideUp {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-.popup-section {
-    animation: slideUp 1s ease-out forwards;
-    opacity: 0;
-}
-.section-1 { animation-delay: 0.5s; }
-.section-2 { animation-delay: 1.5s; }
-.section-3 { animation-delay: 2.5s; }
-.section-4 { animation-delay: 3.5s; }
-</style>
+    <style>
+    @keyframes slideUp {
+        from { transform: translateY(30px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    .popup-section {
+        animation: slideUp 1s ease-out forwards;
+        opacity: 0;
+    }
+    .section-1 { animation-delay: 0.5s; }
+    .section-2 { animation-delay: 1.5s; }
+    .section-3 { animation-delay: 2.5s; }
+    .section-4 { animation-delay: 3.5s; }
+    .sidebar-container {
+        background-color: #f5f6fa;
+        padding: 10px 0 0 10px;
+        border-radius: 10px;
+    }
+    .sidebar-tab {
+        padding: 0.6em 1.2em;
+        margin: 0.3em 0;
+        font-weight: 500;
+        color: #2f3640;
+        text-decoration: none;
+        display: block;
+        border-radius: 6px;
+    }
+    .sidebar-tab:hover {
+        background-color: #dcdde1;
+        cursor: pointer;
+    }
+    .sidebar-tab.active {
+        background-color: #dcdde1;
+        font-weight: bold;
+    }
+    </style>
 """, unsafe_allow_html=True)
 
-# ------------------------------ SECTION: Gaze Info ------------------------------
-if section == "📊 Gaze Visualization Info":
+# ---------- NAVIGATION -----------
+st.sidebar.markdown('<div class="sidebar-container">', unsafe_allow_html=True)
+selected = st.sidebar.radio("\U0001F4C1 Navigation", ["\U0001F4CA Gaze Visualization Info", "\U0001F3AC Video + Graph Dashboard"])
+st.sidebar.markdown('</div>', unsafe_allow_html=True)
+
+# ---------- PAGE: GAZE INFO -----------
+if selected == "\U0001F4CA Gaze Visualization Info":
     st.image("conclip/Image.jpeg", use_container_width=True)
 
-    # SECTION 1
     st.markdown("""
     <div class="popup-section section-1" style="background-color: #DCEEFF; padding: 25px; border-radius: 10px; margin-top: 30px;">
     <blockquote style="font-size: 1.1em; text-align: center; font-weight: bold; font-style: italic; border-left: 6px solid #95A5A6; background-color: #ECF0F1; padding: 1em; margin: 1.5em 0; border-radius: 6px;">
-        “Is the viewer’s attention firmly focused on key moments,<br>or does it float, drifting between different scenes in search of something new?”
+        “Is the viewer’s attention firmly focused on key moments,<br>
+        or does it float, drifting between different scenes in search of something new?”
     </blockquote>
-    <p style="font-size: 1.05em;">This visualization explores how viewers engage with a video by examining where and how they focus their attention.</p>
+    <p style="font-size: 1.05em;">
+        This visualization explores how viewers engage with a video by examining where and how they focus their attention.
+    </p>
     </div>
     """, unsafe_allow_html=True)
 
-    # SECTION 2
     st.markdown("""
     <div class="popup-section section-2" style="background-color: #DCEEFF; padding: 25px; border-radius: 10px; margin-top: 30px;">
     <h3>📊 How Do We Measure Focus?</h3>
@@ -53,26 +77,28 @@ if section == "📊 Gaze Visualization Info":
         <li><b>Convex Hull</b>: Encloses all gaze points loosely.</li>
         <li><b>Concave Hull</b>: Follows the actual shape of gaze, revealing true focus.</li>
     </ul>
-    <p style="font-size: 1.05em;">🔹 The <b>difference in area</b> between the two tells us how spread out or concentrated the gaze is.</p>
+    <p style="font-size: 1.05em;">👉 The <b>difference in area</b> between the two tells us how spread out or concentrated the gaze is.</p>
     <div style="display: flex; gap: 20px; justify-content: space-between;">
         <div style="width: 48%;">
             <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/convex_concave_image.jpg" style="width: 100%; border-radius: 8px;">
-            <p style="font-size: 0.95em; text-align: center; color: #6c757d;">📊 Diagram: Convex vs Concave Hulls</p>
+            <p style="font-size: 0.95em; text-align: center; color: #6c757d; margin-top: 8px;">📊 Diagram: Convex vs Concave Hulls</p>
         </div>
         <div style="width: 48%;">
             <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/convex_concave_SIMPS_9a.gif" style="width: 100%; border-radius: 8px;">
-            <p style="font-size: 0.95em; text-align: center; color: #6c757d;">🎥 Real Example: Gaze Boundaries Over Time</p>
+            <p style="font-size: 0.95em; text-align: center; color: #6c757d; margin-top: 8px;">🎥 Real Example: Gaze Boundaries Over Time</p>
         </div>
     </div>
     </div>
     """, unsafe_allow_html=True)
 
-    # SECTION 3
     st.markdown("""
     <div class="popup-section section-3" style="background-color:#f3e5f5; padding: 25px; border-radius: 10px; margin-top: 30px;">
     <h3>📊 Focus-Concentration (F-C) Score</h3>
     <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/formula_image.jpeg" style="width: 100%; border-radius: 8px;">
-    <p style="font-size: 0.95em; text-align: center; color: #6c757d; font-style: italic; margin-top: 8px;">🧾 Area calculation using a rolling average across the last 20 frames</p>
+    <p style="font-size: 0.95em; text-align: center; color: #6c757d; font-style: italic; margin-top: 8px;">🧲 Area calculation using a rolling average across the last 20 frames</p>
+    <p style="font-size: 1.05em;">
+        The <b>F-C Score</b> helps quantify gaze behavior:
+    </p>
     <ul style="font-size: 1.05em;">
         <li><b>Close to 1</b> → tight gaze cluster → <span style="color:#2e7d32;"><b>high concentration</b></span>.</li>
         <li><b>Much lower than 1</b> → scattered gaze → <span style="color:#d32f2f;"><b>low concentration / exploration</b></span>.</li>
@@ -81,7 +107,6 @@ if section == "📊 Gaze Visualization Info":
     </div>
     """, unsafe_allow_html=True)
 
-    # SECTION 4
     st.markdown("""
     <div class="popup-section section-4" style="background-color: #f3e5f5; padding: 25px; border-radius: 10px; margin-top: 30px;">
     <h3>🎥 Visual Examples of Focus</h3>
@@ -101,8 +126,8 @@ if section == "📊 Gaze Visualization Info":
     </div>
     """, unsafe_allow_html=True)
 
-# ------------------------------ SECTION: Video Analysis ------------------------------
-elif section == "🎬 Video + Graph Dashboard":
+# ---------- PAGE: DASHBOARD -----------
+else:
     st.title("🎯 Stay Focused or Float Away? : Focus-Concentration Analysis")
 
     video_files = {
@@ -121,7 +146,7 @@ elif section == "🎬 Video + Graph Dashboard":
     repo = "InfoVisual"
     clips_folder = "clips_folder"
 
-    selected_video = st.selectbox("🎬 Select a video", list(video_files.keys()))
+    selected_video = st.selectbox("🎥 Select a video", list(video_files.keys()))
 
     if selected_video:
         st.video(base_video_url + video_files[selected_video])
@@ -130,6 +155,7 @@ elif section == "🎬 Video + Graph Dashboard":
         with st.spinner("Running analysis..."):
             gaze = load_gaze_data(user, repo, folder)
             video_filename = f"{selected_video}.mp4"
+
             if not os.path.exists(video_filename):
                 download_video(base_video_url + video_files[selected_video], video_filename)
 
@@ -146,7 +172,9 @@ elif section == "🎬 Video + Graph Dashboard":
         col1, col2 = st.columns([2, 1])
         with col1:
             data = df.reset_index().melt(id_vars="Frame", value_vars=["Convex Area (Rolling)", "Concave Area (Rolling)"], var_name="Metric", value_name="Area")
-            chart = alt.Chart(data).mark_line().encode(x="Frame:Q", y="Area:Q", color="Metric:N").properties(width=600, height=300)
+            chart = alt.Chart(data).mark_line().encode(
+                x="Frame:Q", y="Area:Q", color="Metric:N"
+            ).properties(width=600, height=300)
             rule = alt.Chart(pd.DataFrame({'Frame': [frame]})).mark_rule(color='red').encode(x='Frame')
             st.altair_chart(chart + rule, use_container_width=True)
 
