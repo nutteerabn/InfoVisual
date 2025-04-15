@@ -5,9 +5,11 @@ st.set_page_config(layout="wide")
 # -------------------- 🎯 TITLE ---------------------
 st.title("🌟 Understanding Viewer Focus Through Gaze Visualization")
 
-# -------------------- 📌 SECTION 1 ---------------------
+# -------------------- 🎯 SECTION 1 ---------------------
 st.markdown("""
 <div style="background-color: #fff8dc; padding: 25px; border-radius: 10px; margin-top: 20px;">
+
+    <h2>📌 What Captures Attention?</h2>
 
     <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/conclip/Image.jpeg"
          width="100%" style="border-radius: 8px; margin-bottom: 15px;">
