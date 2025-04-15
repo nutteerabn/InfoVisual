@@ -12,9 +12,6 @@ st.markdown("""
 
 <h2 style="font-size: 1.8em; font-weight: bold;">📌 What Captures Attention?</h2>
 
-<img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/conclip/Image.jpeg"
-     style="width: 100%; border-radius: 8px; margin-bottom: 20px;" />
-
 <blockquote style="
     font-size: 1.1em;
     text-align: center;
