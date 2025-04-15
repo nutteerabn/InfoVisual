@@ -1,7 +1,7 @@
 import streamlit as st
 
 # หัวข้อรูปภาพด้านบน
-st.image("conclip/Image.jpeg", use_column_width=True)
+st.image("conclip/Image.jpeg", use_container_width=True)
 
 # สร้างแท็บ
 tab1, tab2, tab3, tab4 = st.tabs([
