@@ -22,8 +22,17 @@ tab1, tab2, tab3, tab4 = st.tabs([
 with tab1:
     st.subheader("🎯 Goal of This Visualization")
 
-    st.markdown("""
-<blockquote style="font-size: 1em; text-align: center; font-weight: bold; font-style: italic; border-left: 4px solid #999; padding-left: 1em; margin: 1.5em 0;">
+    sst.markdown("""
+<blockquote style="
+    font-size: 1em;
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+    border-left: 4px solid #999;
+    background-color: #fff8dc;  /* สีเหลืองอ่อน */
+    padding: 1em;
+    margin: 1.5em 0;
+">
     “Is the viewer’s attention firmly focused on key moments,<br>
     or does it float, drifting between different scenes in search of something new?”
 </blockquote>
