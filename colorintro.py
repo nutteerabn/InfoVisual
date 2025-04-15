@@ -2,15 +2,6 @@ import streamlit as st
 
 st.set_page_config(layout="wide")
 
-# ตั้งค่า font
-st.markdown("""
-    <style>
-        * {
-            font-family: 'Helvetica Neue', sans-serif;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
 # -------------------- 🎯 TITLE ---------------------
 st.title("🌟 Understanding Viewer Focus Through Gaze Visualization")
 
