@@ -21,9 +21,7 @@ with tab1:
     """, unsafe_allow_html=True)
 
     st.write("""
-    The goal of this visualization is to understand how viewers engage with a video by examining where and how they focus their attention.
-    
-    By comparing the areas where viewers look (represented by convex and concave hulls), the visualization highlights whether their attention stays focused on a specific part of the video or shifts around.
+    The goal of this visualization is to understand how viewers engage with a video by examining where and how they focus their attention. By comparing the areas where viewers look (represented by convex and concave hulls), the visualization highlights whether their attention stays focused on a specific part of the video or shifts around.
 
     Ultimately, this visualization helps us uncover patterns of focus and exploration, providing insights into how viewers interact with different elements of the video.
     """)
