@@ -111,7 +111,7 @@ import streamlit as st
 import time
 
 placeholder = st.empty()
-time.sleep(1)
+time.sleep(2)
 placeholder.success("🎉 Helooooooo!")
 
 import streamlit as st
