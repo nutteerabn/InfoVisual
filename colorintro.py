@@ -5,7 +5,7 @@ st.set_page_config(layout="wide")
 # -------------------- 🎯 TITLE ---------------------
 st.title("🌟 Understanding Viewer Focus Through Gaze Visualization")
 
-# SECTION 1: What Captures Attention?
+# -------------------- 📌 SECTION 1 ---------------------
 st.markdown("""
 <div style="background-color: #fff8dc; padding: 25px; border-radius: 10px; margin-bottom: 30px;">
     <h2 style="font-size: 1.8em; font-weight: bold;">📌 What Captures Attention?</h2>
