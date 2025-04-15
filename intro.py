@@ -17,8 +17,8 @@ with tab1:
 
     st.markdown("""
 <div style="text-align: center; font-size: 1.3em; font-style: italic; margin-top: 1em; margin-bottom: 1em;">
-“Is the viewer’s attention firmly focused on key moments,<br>
-or does it float, drifting between different scenes in search of something new?”
+“**Is the viewer’s attention firmly focused on key moments,<br>
+or does it float, drifting between different scenes in search of something new?**”
 </div>
 """, unsafe_allow_html=True)
 
