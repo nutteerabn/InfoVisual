@@ -138,3 +138,34 @@ st.markdown("""
         👀 Here's an attention-catching message that slides up!
     </div>
 """, unsafe_allow_html=True)
+
+import streamlit as st
+
+# Inject CSS for animation
+st.markdown("""
+    <style>
+    @keyframes slideUp {
+        from {transform: translateY(20px); opacity: 0;}
+        to {transform: translateY(0); opacity: 1;}
+    }
+
+    .popup-box {
+        background-color: #fff8dc;
+        padding: 1rem;
+        border-left: 6px solid #f9a825;
+        border-radius: 6px;
+        font-size: 1.1rem;
+        animation: slideUp 0.6s ease-out;
+        margin-top: 1rem;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# ปุ่ม trigger
+if st.button("💡 Show Insight"):
+    st.markdown("""
+        <div class="popup-box">
+            🔍 <strong>Focus Insight:</strong><br>
+            Viewers concentrated their attention tightly in this moment, suggesting strong engagement.
+        </div>
+    """, unsafe_allow_html=True)
