@@ -1,7 +1,7 @@
 import streamlit as st
 st.markdown("""
     <style>
-        html, body, [class*="css"]  {
+        * {
             font-family: 'Helvetica Neue', sans-serif;
         }
     </style>
