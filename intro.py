@@ -99,3 +99,10 @@ st.subheader("5. Graph: Focus-Score over Time")
 
 st.subheader("6. Summary Insight")
 st.write("Summarize insight from graph or video patterns.")
+
+import streamlit as st
+import time
+
+placeholder = st.empty()
+time.sleep(1)
+placeholder.success("🎉 Welcome to the interactive visualization!")
