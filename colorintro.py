@@ -47,7 +47,7 @@ st.markdown("""
 
 <div style="display: flex; gap: 20px;">
     <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/convex_concave_image.jpg"
-         style="width: 40%; border-radius: 8px;" alt="Diagram of Convex and Concave Hulls">
+         style="width: 38%; border-radius: 8px;" alt="Diagram of Convex and Concave Hulls">
     <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/convex_concave_SIMPS_9a.gif"
          style="width: 48%; border-radius: 8px;" alt="Gaze Boundaries Example">
 </div>
