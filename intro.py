@@ -1,14 +1,32 @@
 import streamlit as st
 
-# แสดงภาพหัวข้อ
+# หัวข้อรูปภาพด้านบน
 st.image("conclip/Image.jpeg", use_column_width=True)
 
-# 🧭 แท็บเนื้อหาแต่ละพาร์ท
-tab1, tab2, tab3, tab4 = st.tabs(["1. Introduction", "2. Concept", "3. Visualization", "4. Interpretation"])
+# สร้างแท็บ
+tab1, tab2, tab3, tab4 = st.tabs([
+    "1. Visualization Goal", 
+    "2. Convex & Concave Hull", 
+    "3. Visualization Example", 
+    "4. Interpretation"
+])
 
+# ⬅️ แท็บที่ 1 : Visualization Goal
 with tab1:
-    st.subheader("1. Introduction")
-    st.write("Introduce the goal of this visualization...")
+    st.subheader("🎯 Visualization Goal")
+
+    st.markdown("""
+    > *“Is the viewer’s attention firmly focused on key moments,  
+    > or does it float, drifting between different scenes in search of something new?”*
+    """, unsafe_allow_html=True)
+
+    st.write("""
+    The goal of this visualization is to understand how viewers engage with a video by examining where and how they focus their attention.
+    
+    By comparing the areas where viewers look (represented by convex and concave hulls), the visualization highlights whether their attention stays focused on a specific part of the video or shifts around.
+
+    Ultimately, this visualization helps us uncover patterns of focus and exploration, providing insights into how viewers interact with different elements of the video.
+    """)
 
 with tab2:
     st.subheader("2. Convex & Concave Hull")
