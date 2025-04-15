@@ -13,7 +13,7 @@ tab1, tab2, tab3, tab4 = st.tabs([
 
 # ⬅️ แท็บที่ 1 : Visualization Goal
 with tab1:
-    st.subheader("🎯 Visualization Goal")
+    st.subheader("🎯 Goal of This Visualization")
 
     st.markdown("""
     > *“Is the viewer’s attention firmly focused on key moments,  
