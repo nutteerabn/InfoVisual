@@ -106,3 +106,10 @@ import time
 placeholder = st.empty()
 time.sleep(1)
 placeholder.success("🎉 Welcome to the interactive visualization!")
+
+import streamlit as st
+import time
+
+placeholder = st.empty()
+time.sleep(1)
+placeholder.success("🎉 Helooooooo!")
