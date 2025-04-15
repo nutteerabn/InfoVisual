@@ -66,12 +66,16 @@ st.markdown("""
 """, unsafe_allow_html=True)
 # -------------------- 📊 SECTION 3 ---------------------
 st.markdown("""
-<div style="background-color: #f3e5f5; padding: 25px; border-radius: 10px; margin-top: 30px;">
+<div style="background-color: #fff3e0; padding: 25px; border-radius: 10px; margin-top: 30px;">
 
 <h3>📊 Focus-Concentration (F-C) Score</h3>
 
 <img src="https://raw.githubusercontent.com/nutteerabn/InfoVisual/main/gif_sample/formula_image.jpeg"
      style="width: 100%; border-radius: 8px;" alt="Formula Example">
+
+<p style="font-size: 0.95em; text-align: center; color: #6c757d; font-style: italic; margin-top: 8px;">
+    🧮 Area calculation using a rolling average across the last 20 frames
+</p>
 
 <p style="font-size: 1.05em;">
     The <b>F-C Score</b> helps quantify gaze behavior:
